@@ -1,0 +1,23 @@
+name: Sync quantlib organization repository
+on:
+  push:
+    #tags:
+    #  - 'v1.[0-9]+'
+    #  - 'v1.[0-9]+'
+
+jobs:
+  sync-org-repo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+    - name: Push new commits
+      run: |
+        git remote add quantlib git@github.com:quantlib/QuantLib.git
+        git fetch quantlib
+        # git push quantlib ${{ github.ref_name }}
+        git switch -c temp ${{ github.ref_name }}
+        git push quantlib temp:master
+
