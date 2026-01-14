@@ -5,6 +5,9 @@ on:
     #  - 'v1.[0-9]+'
     #  - 'v1.[0-9]+'
 
+permissions:
+  contents: write
+
 jobs:
   sync-org-repo:
     runs-on: ubuntu-latest
@@ -14,6 +17,8 @@ jobs:
         fetch-depth: 0
         fetch-tags: true
     - name: Push new commits
+      env:
+        GITHUB_TOKEN: ${{ secrets.ORG_PUSH_PAT }}
       run: |
         git remote add quantlib git@github.com:quantlib/QuantLib.git
         git fetch quantlib
