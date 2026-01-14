@@ -17,10 +17,10 @@ jobs:
         repository: quantlib/QuantLib
         token: ${{ secrets.ORG_PUSH_PAT }}
         ref: master
-        path: /quantlib
+        path: quantlib
     - name: Setup second remote
       run: |
-        cd /quantlib
+        cd quantlib
         git remote add src https://github.com/lballabio/QuantLib.git
         git fetch src
         git tag
@@ -28,8 +28,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.ORG_PUSH_PAT }}
       run: |
-        cd /quantlib
-        # git push quantlib ${{ github.ref_name }}
+        cd quantlib
+        # git push origin ${{ github.ref_name }}
         git merge --ff-only ${{ github.ref_name }}
         git push origin master
 
