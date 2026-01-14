@@ -23,13 +23,14 @@ jobs:
         cd quantlib
         git remote add src https://github.com/lballabio/QuantLib.git
         git fetch src
-        git tag
     - name: Push new commits
       env:
         GITHUB_TOKEN: ${{ secrets.ORG_PUSH_PAT }}
       run: |
         cd quantlib
+        git push origin test-tag
+        git merge --ff-only test-tag
         # git push origin ${{ github.ref_name }}
-        git merge --ff-only src/${{ github.ref_name }}
-        git push origin master
+        # git merge --ff-only ${{ github.ref_name }}
+        # git push origin master
 
