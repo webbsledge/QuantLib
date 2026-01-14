@@ -14,15 +14,22 @@ jobs:
     steps:
     - uses: actions/checkout@v6
       with:
-        fetch-depth: 0
-        fetch-tags: true
+        repository: quantlib/QuantLib
+        token: ${{ secrets.ORG_PUSH_PAT }}
+        ref: master
+        path: /quantlib
+    - name: Setup second remote
+      run: |
+        cd /quantlib
+        git remote add src https://github.com/lballabio/QuantLib.git
+        git fetch src
+        git tag
     - name: Push new commits
       env:
         GITHUB_TOKEN: ${{ secrets.ORG_PUSH_PAT }}
       run: |
-        git remote add quantlib https://x-access-token:${{ secrets.ORG_PUSH_PAT }}@github.com/quantlib/QuantLib.git
-        git fetch quantlib
+        cd /quantlib
         # git push quantlib ${{ github.ref_name }}
-        git switch -c temp ${{ github.ref_name }}
-        git push quantlib temp:master
+        git merge --ff-only ${{ github.ref_name }}
+        git push origin master
 
