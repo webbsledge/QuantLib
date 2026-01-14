@@ -20,7 +20,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.ORG_PUSH_PAT }}
       run: |
-        git remote add quantlib git@github.com:quantlib/QuantLib.git
+        git remote add quantlib https://x-access-token:${{ secrets.ORG_PUSH_PAT }}@github.com/quantlib/QuantLib.git
         git fetch quantlib
         # git push quantlib ${{ github.ref_name }}
         git switch -c temp ${{ github.ref_name }}
