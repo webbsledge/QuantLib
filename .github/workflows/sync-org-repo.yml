@@ -30,6 +30,6 @@ jobs:
       run: |
         cd quantlib
         # git push origin ${{ github.ref_name }}
-        git merge --ff-only ${{ github.ref_name }}
+        git merge --ff-only src/${{ github.ref_name }}
         git push origin master
 
