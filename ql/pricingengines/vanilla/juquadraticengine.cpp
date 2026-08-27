@@ -69,16 +69,20 @@ namespace QuantLib {
         BlackCalculator black(payoff, forwardPrice,
                               std::sqrt(variance), riskFreeDiscount);
 
-        // Besides the well-known case of a call on a non-dividend-paying
-        // stock, early exercise is never optimal for a put when the
-        // risk-free rate is null or negative and the dividend yield is not
-        // negative: exercising yields K-S, while just holding the option is
-        // worth at least K*riskFreeDiscount - S*dividendDiscount >= K-S.
-        // The critical price would be 0 in that case and the approximation
-        // below would break down.
+        // For a call, exercising yields S-K while holding is worth at least
+        // S*dividendDiscount - K*riskFreeDiscount, so early exercise is never
+        // optimal when dividendDiscount >= 1 and dividendDiscount >=
+        // riskFreeDiscount.  The mirror image holds for a put: exercising
+        // yields K-S and holding is worth at least K*riskFreeDiscount -
+        // S*dividendDiscount, so early exercise is never optimal when
+        // riskFreeDiscount >= 1 and riskFreeDiscount >= dividendDiscount.
+        // The put case also has to be caught here because the critical price
+        // is 0 when the risk-free rate is null, which would make hA vanish
+        // and break down the approximation below.
         bool earlyExerciseNeverOptimal =
-            (dividendDiscount >= 1.0 && payoff->optionType() == Option::Call)
-            || (riskFreeDiscount >= 1.0 && dividendDiscount <= 1.0
+            (dividendDiscount >= 1.0 && dividendDiscount >= riskFreeDiscount
+             && payoff->optionType() == Option::Call)
+            || (riskFreeDiscount >= 1.0 && riskFreeDiscount >= dividendDiscount
                 && payoff->optionType() == Option::Put);
 
         if (earlyExerciseNeverOptimal) {
