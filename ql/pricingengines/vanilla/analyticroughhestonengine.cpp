@@ -238,7 +238,7 @@ namespace QuantLib {
         const Real v0    = model_->v0();
         const Real a     = model_->hurst() + 0.5;
 
-        const std::vector<std::complex<Real>> h{solveAdamsRiccati(z, t)};
+        const std::vector<std::complex<Real>> h = solveAdamsRiccati(z, t);
 
         const Real dt{t / timeSteps_};
 
