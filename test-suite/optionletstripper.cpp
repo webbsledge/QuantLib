@@ -1097,7 +1097,7 @@ namespace {
         // The flat ATM curve and flat surface imply an exact zero adjustment;
         // the tight price tolerance below therefore isolates leg conventions.
         for (Volatility spread : stripper2->spreadsVol())
-            BOOST_CHECK_SMALL(spread, 1.0e-12);
+            QL_CHECK_SMALL(spread, 1.0e-12);
 
         Handle<OptionletVolatilityStructure> vol(
             ext::make_shared<StrippedOptionletAdapter>(stripper2));
@@ -1245,7 +1245,7 @@ namespace {
             MakeCapFloor(CapFloor::Cap, tenors.front(), iborIndex,
                          strikes.front(), 0 * Days)
                 .withPricingEngine(engine);
-        BOOST_CHECK_SMALL(cap->NPV() - targetPrices.front(), vars.tolerance);
+        QL_CHECK_SMALL(cap->NPV() - targetPrices.front(), vars.tolerance);
     }
 
 }
@@ -1311,7 +1311,7 @@ BOOST_AUTO_TEST_CASE(testIborReferenceDateCompatibility) {
             ext::shared_ptr<CapFloor> legacyCap =
                 MakeCapFloor(type, capFloorLength, iborIndex, vars.strikes[j], 0 * Days)
                     .withPricingEngine(legacyEngine);
-            BOOST_CHECK_SMALL(
+            QL_CHECK_SMALL(
                 capFloorPrices[i][j] - legacyCap->NPV(), 1.0e-12);
         }
         capFloorLength += iborIndex->tenor();
@@ -1333,7 +1333,7 @@ BOOST_AUTO_TEST_CASE(testIborReferenceDateCompatibility) {
             MakeCapFloor(CapFloor::Cap, vars.optionTenors[i], iborIndex,
                          atmStrikes[i], 0 * Days)
                 .withPricingEngine(legacyEngine);
-        BOOST_CHECK_SMALL(atmPrices[i] - legacyCap->NPV(), 1.0e-12);
+        QL_CHECK_SMALL(atmPrices[i] - legacyCap->NPV(), 1.0e-12);
     }
 }
 
