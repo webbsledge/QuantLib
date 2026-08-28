@@ -123,10 +123,10 @@ BOOST_AUTO_TEST_CASE(testFractionalAdamsScheme) {
         return sum;
     }();
 
-    const std::vector<std::complex<Real>> wc{
+    const std::vector<std::complex<Real>> wc =
         FractionalAdams<std::complex<Real>>(alpha).solve(
             [lambda](Real, const std::complex<Real>& x) { return lambda * x; },
-            std::complex<Real>(1.0), 1.0, 400)};
+            std::complex<Real>(1.0), 1.0, 400);
 
     if (std::abs(wc.back() - mittagLefflerComplexRef) > mlTol)
         BOOST_ERROR("failed to reproduce complex Mittag-Leffler solution of "
