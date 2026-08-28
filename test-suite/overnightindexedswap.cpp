@@ -1108,8 +1108,8 @@ BOOST_AUTO_TEST_CASE(testNonstandardSwapConversionPreservesObservationConvention
     converted->setPricingEngine(engine);
     simpleSource->setPricingEngine(engine);
     simpleConverted->setPricingEngine(engine);
-    BOOST_CHECK_SMALL(converted->NPV() - source->NPV(), 1.0e-12);
-    BOOST_CHECK_SMALL(simpleConverted->NPV() - simpleSource->NPV(), 1.0e-12);
+    QL_CHECK_SMALL(converted->NPV() - source->NPV(), 1.0e-12);
+    QL_CHECK_SMALL(simpleConverted->NPV() - simpleSource->NPV(), 1.0e-12);
 }
 
 BOOST_AUTO_TEST_CASE(testSettlementDaysEffectiveDateConflict) {

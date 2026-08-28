@@ -968,9 +968,11 @@ namespace QuantLib {
             Matrix spreadVols(2,2,0.);
             for (Size i=0; i<2; i++){
                 for (Size j=0; j<2; j++){
-                    strikes[i][j] = volatilityType_ == VolatilityType::Normal ?
-                        atmForwards[i][j] + strike - atmForward :
-                        (atmForwards[i][j]+atmShifts[i][j])/moneyness - atmShifts[i][j];
+                    if (volatilityType_ == VolatilityType::Normal)
+                        strikes[i][j] = atmForwards[i][j] + strike - atmForward;
+                    else
+                        strikes[i][j] =
+                            (atmForwards[i][j]+atmShifts[i][j])/moneyness - atmShifts[i][j];
                     if (marketSpreads) {
                         const Size section =
                             (optionTimesPreviousIndex+i)*nSwapTenors_ +
