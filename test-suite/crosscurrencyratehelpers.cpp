@@ -746,7 +746,7 @@ BOOST_AUTO_TEST_CASE(testMtMHelperMatchesStandaloneWithAsymmetricFxHolidays) {
 
     auto helperSwap = helper->swap();
     auto standalone = ext::make_shared<MtMCrossCurrencyBasisSwap>(
-        MtMCrossCurrencyBasisSwap::Type::PayFxBaseCurrency,
+        MtMCrossCurrencyBasisSwap::PayFxBaseCurrency,
         1.0, EURCurrency(), helperSwap->fxBaseSchedule(), eurIndex, 0.0, 1.0,
         1.0, USDCurrency(), helperSwap->fxQuoteSchedule(), usdIndex, 0.0, 1.0,
         /*isFxBaseCurrencyLegResettable=*/false,
@@ -788,7 +788,7 @@ BOOST_AUTO_TEST_CASE(testMtMHelperMatchesStandaloneWithAsymmetricFxHolidays) {
     // Under the previous zero-day convention the first reset is still in the
     // future and is projected instead of using today's observed fixing.
     auto zeroLagReset = ext::make_shared<MtMCrossCurrencyBasisSwap>(
-        MtMCrossCurrencyBasisSwap::Type::PayFxBaseCurrency,
+        MtMCrossCurrencyBasisSwap::PayFxBaseCurrency,
         1.0, EURCurrency(), helperSwap->fxBaseSchedule(), eurIndex, 0.0, 1.0,
         1.0, USDCurrency(), helperSwap->fxQuoteSchedule(), usdIndex, 0.0, 1.0,
         /*isFxBaseCurrencyLegResettable=*/false, /*fxResetFixingDays=*/0, /*fxResetFixingCalendar=*/Calendar(),
