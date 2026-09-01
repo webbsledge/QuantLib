@@ -113,7 +113,8 @@ namespace QuantLib {
             underlyingSwap_ =
                 (ext::shared_ptr<OvernightIndexedSwap>)(
                     MakeOIS(swapIndex_->tenor(),
-                            OIswap_index->overnightIndex(), usedStrike)
+                            OIswap_index->overnightIndex())
+                    .withFixedRate(usedStrike)
                     .withEffectiveDate(swapIndex_->valueDate(fixingDate_))
                     .withPaymentCalendar(swapIndex_->fixingCalendar())
                     .withFixedLegDayCount(swapIndex_->dayCounter())

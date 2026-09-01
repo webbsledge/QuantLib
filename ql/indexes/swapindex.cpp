@@ -208,7 +208,8 @@ namespace QuantLib {
         // caching mechanism
         if (lastFixingDate_!=fixingDate) {
             Rate fixedRate = 0.0;
-            lastSwap_ = MakeOIS(tenor_, overnightIndex_, fixedRate)
+            lastSwap_ = MakeOIS(tenor_, overnightIndex_)
+                .withFixedRate(fixedRate)
                 .withEffectiveDate(valueDate(fixingDate))
                 .withFixedLegDayCount(dayCounter_)
                 .withTelescopicValueDates(telescopicValueDates_)

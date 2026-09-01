@@ -447,7 +447,8 @@ BOOST_AUTO_TEST_CASE(testCachedValue) {
                     "\nexpected:   " << cachedNPV);
 
     ext::shared_ptr<OvernightIndexedSwap> oiswap =
-        MakeOIS(10*Years, vars.oisIndex, 0.06)
+        MakeOIS(10*Years, vars.oisIndex)
+        .withFixedRate(0.06)
         .withEffectiveDate(startDate)
         .withPaymentFrequency(Annual)
         .withFixedLegDayCount(vars.fixedDayCount);
@@ -953,7 +954,8 @@ BOOST_AUTO_TEST_CASE(testImpliedVolatilityOis) {
             for (Real& strike : strikes) {
                 for (auto& k : type) {
                     ext::shared_ptr<OvernightIndexedSwap> swap =
-                        MakeOIS(length, vars.oisIndex, strike)
+                        MakeOIS(length, vars.oisIndex)
+                            .withFixedRate(strike)
                             .withEffectiveDate(startDate)
                             .withPaymentFrequency(Annual)
                             .withFixedLegDayCount(vars.fixedDayCount)
