@@ -1234,20 +1234,20 @@ BOOST_AUTO_TEST_CASE(testVanillaEngines) {
     ext::shared_ptr<Gaussian1dCapFloorEngine> mfCapFloorEngine2(
         new Gaussian1dCapFloorEngine(mf2, 64, 7.0));
     std::vector<CapFloor> c2 = {
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.01),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.02),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.03),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.04),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.05),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.07),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2, 0.10),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.01),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.02),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.03),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.04),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.05),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.07),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2, 0.10)
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.01),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.02),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.03),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.04),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.05),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.07),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex2).withStrike(0.10),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.01),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.02),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.03),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.04),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.05),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.07),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex2).withStrike(0.10)
     };
 
     for (auto& i : c2) {
@@ -1366,22 +1366,22 @@ BOOST_AUTO_TEST_CASE(testVanillaEngines) {
         new Gaussian1dCapFloorEngine(mf4, 64, 7.0));
 
     std::vector<CapFloor> c4 = {
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.01),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.02),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.03),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.04),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.05),
-        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4, 0.06),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.01),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.02),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.03),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.04),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.05),
+        MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.06),
         // //exclude because caplet stripper fails for this strike
-        // MakeCapFloor(CapFloor::Cap,5*Years,iborIndex4,0.10),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.01),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.02),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.03),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.04),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.05),
-        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4, 0.06)
+        // MakeCapFloor(CapFloor::Cap, 5 * Years, iborIndex4).withStrike(0.10),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.01),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.02),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.03),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.04),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.05),
+        MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.06)
         // //exclude because caplet stripper fails for this strike
-        // MakeCapFloor(CapFloor::Floor,5*Years,iborIndex4,0.10)
+        // MakeCapFloor(CapFloor::Floor, 5 * Years, iborIndex4).withStrike(0.10)
     };
 
     for (auto& i : c4) {
