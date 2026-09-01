@@ -35,7 +35,9 @@ namespace QuantLib {
       // setting the fixed leg tenor avoids that MakeVanillaSwap throws
       // because of an unknown fixed leg default tenor for a currency,
       // notice that only the floating leg of the swap is used anyway
-      makeVanillaSwap_(MakeVanillaSwap(tenor, iborIndex, 0.0, forwardStart)
+      makeVanillaSwap_(MakeVanillaSwap(tenor, iborIndex)
+                           .withFixedRate(0.0)
+                           .withForwardStart(forwardStart)
                            .withFixedLegTenor(1 * Years)
                            .withFixedLegDayCount(Actual365Fixed())) {}
 

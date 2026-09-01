@@ -608,7 +608,8 @@ BOOST_AUTO_TEST_CASE(testGsrModel) {
 
     ext::shared_ptr<VanillaSwap> underlying = swpIdx->underlyingSwap(expiry);
     ext::shared_ptr<VanillaSwap> underlyingFixed =
-        MakeVanillaSwap(10 * Years, swpIdx->iborIndex(), forward)
+        MakeVanillaSwap(10 * Years, swpIdx->iborIndex())
+            .withFixedRate(forward)
             .withEffectiveDate(swpIdx->valueDate(expiry))
             .withFixedLegCalendar(swpIdx->fixingCalendar())
             .withFixedLegDayCount(swpIdx->dayCounter())
@@ -730,7 +731,8 @@ BOOST_AUTO_TEST_CASE(testGsrModelQuoteUpdate) {
     Real forward = swpIdx->fixing(expiry);
 
     ext::shared_ptr<VanillaSwap> underlyingFixed =
-        MakeVanillaSwap(10 * Years, swpIdx->iborIndex(), forward)
+        MakeVanillaSwap(10 * Years, swpIdx->iborIndex())
+            .withFixedRate(forward)
             .withEffectiveDate(swpIdx->valueDate(expiry))
             .withFixedLegCalendar(swpIdx->fixingCalendar())
             .withFixedLegDayCount(swpIdx->dayCounter())

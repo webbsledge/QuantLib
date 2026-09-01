@@ -1173,14 +1173,14 @@ BOOST_AUTO_TEST_CASE(testVanillaEngines) {
     for (Size i = 0; i < outputs1.expiries_.size(); i++) {
         for (Size j = 0; j < outputs1.smileStrikes_[0].size(); j++) {
             ext::shared_ptr<VanillaSwap> underlyingCall =
-                MakeVanillaSwap(outputs1.tenors_[i], iborIndex1,
-                                outputs1.smileStrikes_[i][j])
+                MakeVanillaSwap(outputs1.tenors_[i], iborIndex1)
+                    .withFixedRate(outputs1.smileStrikes_[i][j])
                     .withEffectiveDate(
                          TARGET().advance(outputs1.expiries_[i], 2, Days))
                     .receiveFixed(false);
             ext::shared_ptr<VanillaSwap> underlyingPut =
-                MakeVanillaSwap(outputs1.tenors_[i], iborIndex1,
-                                outputs1.smileStrikes_[i][j])
+                MakeVanillaSwap(outputs1.tenors_[i], iborIndex1)
+                    .withFixedRate(outputs1.smileStrikes_[i][j])
                     .withEffectiveDate(
                          TARGET().advance(outputs1.expiries_[i], 2, Days))
                     .receiveFixed(true);
@@ -1290,14 +1290,14 @@ BOOST_AUTO_TEST_CASE(testVanillaEngines) {
     for (Size i = 0; i < outputs3.expiries_.size(); i++) {
         for (Size j = 0; j < outputs3.smileStrikes_[0].size(); j++) {
             ext::shared_ptr<VanillaSwap> underlyingCall =
-                MakeVanillaSwap(outputs3.tenors_[i], iborIndex3,
-                                outputs3.smileStrikes_[i][j])
+                MakeVanillaSwap(outputs3.tenors_[i], iborIndex3)
+                    .withFixedRate(outputs3.smileStrikes_[i][j])
                     .withEffectiveDate(
                          TARGET().advance(outputs3.expiries_[i], 2, Days))
                     .receiveFixed(false);
             ext::shared_ptr<VanillaSwap> underlyingPut =
-                MakeVanillaSwap(outputs3.tenors_[i], iborIndex3,
-                                outputs3.smileStrikes_[i][j])
+                MakeVanillaSwap(outputs3.tenors_[i], iborIndex3)
+                    .withFixedRate(outputs3.smileStrikes_[i][j])
                     .withEffectiveDate(
                          TARGET().advance(outputs3.expiries_[i], 2, Days))
                     .receiveFixed(true);
@@ -1677,7 +1677,8 @@ BOOST_AUTO_TEST_CASE(testBermudanSwaption) {
         new Gaussian1dSwaptionEngine(mf1, 64, 7.0));
 
     ext::shared_ptr<VanillaSwap> underlyingCall =
-        MakeVanillaSwap(10 * Years, iborIndex1, 0.03)
+        MakeVanillaSwap(10 * Years, iborIndex1)
+            .withFixedRate(0.03)
             .withEffectiveDate(TARGET().advance(referenceDate, 2, Days))
         //.withNominal(100000000.0)
             .receiveFixed(false);
